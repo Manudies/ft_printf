@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manupc <manupc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdiestre <mdiestre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 18:40:11 by manupc            #+#    #+#             */
-/*   Updated: 2025/05/07 19:21:12 by manupc           ###   ########.fr       */
+/*   Created: 2025/05/08 10:44:53 by mdiestre          #+#    #+#             */
+/*   Updated: 2025/05/08 13:34:35 by mdiestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,16 @@
 
 
 // Main print function
-int		ft_printf(const char *format, ...);
+int	ft_printf(const char *format, ...);
 
 // Auxiliary functions
-int	print_char(char c);
+int	ft_print_char(char c);
+int	ft_print_str(char *s);
+int	ft_print_int(int n);
+int	ft_print_unsigned(unsigned int n);
+char *ft_utoa(unsigned int n);
+// int	print_hex(unsigned int n, int uppercase);
+// int	print_ptr(void *ptr);
+// int	print_percent(void);
 
 #endif

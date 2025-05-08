@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: manupc <manupc@student.42.fr>              +#+  +:+       +#+        */
+/*   By: mdiestre <mdiestre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/07 18:53:21 by manupc            #+#    #+#             */
-/*   Updated: 2025/05/07 19:27:02 by manupc           ###   ########.fr       */
+/*   Created: 2025/05/08 10:45:26 by mdiestre          #+#    #+#             */
+/*   Updated: 2025/05/08 13:37:52 by mdiestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,15 @@ int	ft_printf(const char *format, ...)
 		{
 			i++;
 			if (format[i] == 'c')
-				len += print_char(va_arg(args, int));
+				len += ft_print_char(va_arg(args, int));
+			else if (format[i] == 's')
+				len += ft_print_str(va_arg(args, char *));
+			else if (format[i] == 'd' || format[i] == 'i')
+				len += ft_print_int(va_arg(args, int));
+			else if (format[i] == '%')
+				len += write(1, "%", 1);
+			else if (format[i] == 'u')
+				len += ft_print_unsigned(va_arg(args, unsigned int));
 			else
 				len += write(1, &format[i], 1);
 		}
