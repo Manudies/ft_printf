@@ -6,7 +6,7 @@
 #    By: mdiestre <mdiestre@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/05/05 10:41:07 by mdiestre          #+#    #+#              #
-#    Updated: 2025/05/08 10:58:30 by mdiestre         ###   ########.fr        #
+#    Updated: 2025/05/12 14:11:05 by mdiestre         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,8 +17,8 @@ AR			= ar rcs
 RM			= rm -f
 
 INCLUDES	= -Iinclude
-SRCS_DIR	= src/
-OBJS_DIR	= obj/
+SRCS_DIR	= src
+OBJS_DIR	= obj
 
 SRC_FILES	= ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 			  ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
@@ -33,26 +33,26 @@ BONUS_FILES = ft_lstnew_bonus.c ft_lstadd_front_bonus.c ft_lstsize_bonus.c \
 			  ft_lstlast_bonus.c ft_lstadd_back_bonus.c ft_lstdelone_bonus.c \
 			  ft_lstclear_bonus.c ft_lstiter_bonus.c ft_lstmap_bonus.c
 
-SRCS		= $(addprefix $(SRCS_DIR), $(SRC_FILES))
-OBJS		= $(addprefix $(OBJS_DIR), $(SRC_FILES:.c=.o))
+SRCS		= $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
+OBJS		= $(addprefix $(OBJS_DIR)/, $(SRC_FILES:.c=.o))
 
-BONUS_SRCS	= $(addprefix $(SRCS_DIR), $(BONUS_FILES))
-BONUS_OBJS	= $(addprefix $(OBJS_DIR), $(BONUS_FILES:.c=.o))
+BONUS_SRCS	= $(addprefix $(SRCS_DIR)/, $(BONUS_FILES))
+BONUS_OBJS	= $(addprefix $(OBJS_DIR)/, $(BONUS_FILES:.c=.o))
 
 all: $(NAME)
 
 $(NAME): $(OBJS)
 	$(AR) $(NAME) $(OBJS)
 
-$(OBJS_DIR)%.o: $(SRCS_DIR)%.c
-	@mkdir -p $(OBJS_DIR)
+$(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
 bonus: $(NAME) $(BONUS_OBJS)
 	$(AR) $(NAME) $(BONUS_OBJS)
 
 clean:
-	$(RM) $(OBJS) $(BONUS_OBJS)
+	$(RM) -r $(OBJS_DIR)
 
 fclean: clean
 	$(RM) $(NAME)

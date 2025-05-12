@@ -6,7 +6,7 @@
 /*   By: mdiestre <mdiestre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:39:30 by mdiestre          #+#    #+#             */
-/*   Updated: 2025/05/08 13:34:07 by mdiestre         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:25:33 by mdiestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -311,6 +311,129 @@ void test_unsigned(void)
 	printf("\n");
 }
 
+// ======================== TEST: HEX ============================= //
+
+int test_printf_hex_lower(void)  { return printf("hex: [%x]\n", 255); }
+int test_ft_printf_hex_lower(void) { return ft_printf("hex: [%x]\n", 255); }
+
+int test_printf_hex_upper(void)  { return printf("hex: [%X]\n", 255); }
+int test_ft_printf_hex_upper(void) { return ft_printf("hex: [%X]\n", 255); }
+
+int test_printf_hex_zero(void)  { return printf("hex: [%x]\n", 0); }
+int test_ft_printf_hex_zero(void) { return ft_printf("hex: [%x]\n", 0); }
+
+int test_printf_hex_multi(void)  { return printf("hex: [%x %X %x]\n", 10, 28, UINT_MAX); }
+int test_ft_printf_hex_multi(void) { return ft_printf("hex: [%x %X %x]\n", 10, 28, UINT_MAX); }
+
+void test_hex(void)
+{
+	printf("\033[38;5;214m[TEST %%x / %%X - ft_print_hex]\033[0m\n");
+
+	int r1, r2;
+	char *s1, *s2;
+
+	// %x lowercase
+	s1 = capture_output_to_file(test_printf_hex_lower, &r1);
+	s2 = capture_output_to_file(test_ft_printf_hex_lower, &r2);
+	ft_ok(strcmp(s1, s2) == 0, "255 → %x (lowercase)");
+	ft_ok(r1 == r2, "Valor devuelto (%x)");
+	free(s1); free(s2);
+
+	// %X uppercase
+	s1 = capture_output_to_file(test_printf_hex_upper, &r1);
+	s2 = capture_output_to_file(test_ft_printf_hex_upper, &r2);
+	ft_ok(strcmp(s1, s2) == 0, "255 → %X (uppercase)");
+	ft_ok(r1 == r2, "Valor devuelto (%X)");
+	free(s1); free(s2);
+
+	// %x con 0
+	s1 = capture_output_to_file(test_printf_hex_zero, &r1);
+	s2 = capture_output_to_file(test_ft_printf_hex_zero, &r2);
+	ft_ok(strcmp(s1, s2) == 0, "0 → %x");
+	ft_ok(r1 == r2, "Valor devuelto (0)");
+	free(s1); free(s2);
+
+	// varios %x y %X
+	s1 = capture_output_to_file(test_printf_hex_multi, &r1);
+	s2 = capture_output_to_file(test_ft_printf_hex_multi, &r2);
+	ft_ok(strcmp(s1, s2) == 0, "Varios %x y %X");
+	ft_ok(r1 == r2, "Valor devuelto (multi)");
+	free(s1); free(s2);
+
+	printf("\n");
+}
+// ======================== TEST: %p ============================= //
+
+int test_ft_printf_ptr_null(void) { return ft_printf("ptr: [%p]\n", NULL); }
+
+int test_ft_printf_ptr_real(void)
+{
+	int x = 42;
+	return ft_printf("ptr: [%p]\n", &x);
+}
+
+int test_ft_printf_ptr_multi(void)
+{
+	int a = 1, b = 2;
+	return ft_printf("ptrs: [%p %p]\n", &a, &b);
+}
+
+void test_ptr(void)
+{
+	printf("\033[38;5;214m[TEST %%p - ft_print_ptr]\033[0m\n");
+
+	int r;
+	char *s;
+
+	// NULL
+	s = capture_output_to_file(test_ft_printf_ptr_null, &r);
+	ft_ok(strcmp(s, "ptr: [0x0]\n") == 0, "Puntero NULL → 0x0");
+	ft_ok(r == 11, "Valor devuelto (NULL)");
+	free(s);
+
+	// Dirección de variable local (relajado, solo que empieza por "ptr: [0x")
+	s = capture_output_to_file(test_ft_printf_ptr_real, &r);
+	ft_ok(strncmp(s, "ptr: [0x", 8) == 0, "Dirección de variable local (empieza por 0x)");
+	ft_ok(r > 10, "Valor devuelto (puntero no NULL)");
+	free(s);
+
+	// Múltiples punteros (relajado también)
+	s = capture_output_to_file(test_ft_printf_ptr_multi, &r);
+	ft_ok(strncmp(s, "ptrs: [0x", 9) == 0, "Varios punteros %p seguidos (empieza por 0x)");
+	ft_ok(r > 20, "Valor devuelto (multi punteros)");
+	free(s);
+
+	printf("\n");
+}
+
+// ======================== TEST: %% ============================= //
+
+int test_ft_printf_percent_simple(void) { return ft_printf("percent: [%%]\n"); }
+
+int test_ft_printf_percent_multi(void) { return ft_printf("percent: [%%%%]\n"); }
+
+void test_percent(void)
+{
+	printf("\033[38;5;214m[TEST %% - ft_printf]\033[0m\n");
+
+	int r;
+	char *s;
+
+	// Caso simple
+	s = capture_output_to_file(test_ft_printf_percent_simple, &r);
+	ft_ok(strcmp(s, "percent: [%]\n") == 0, "Caso simple %%");
+	ft_ok(r == 13, "Valor devuelto (simple)");
+	free(s);
+
+	// Caso doble (debe imprimir dos %)
+	s = capture_output_to_file(test_ft_printf_percent_multi, &r);
+	ft_ok(strcmp(s, "percent: [%%]\n") == 0, "Caso doble (%%%%)");
+	ft_ok(r == 14, "Valor devuelto (doble)");
+	free(s);
+
+	printf("\n");
+}
+
 // ======================== MAIN ============================= //
 
 int main(void)
@@ -319,6 +442,9 @@ int main(void)
 	test_str();
 	test_int();
 	test_unsigned();
+	test_hex();
+	test_ptr();
+	test_percent();
 
 	if (g_result)
 		printf("\n\033[0;32m✅ TODOS LOS TESTS PASADOS\033[0m\n\n");

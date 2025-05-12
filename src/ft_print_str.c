@@ -6,7 +6,7 @@
 /*   By: mdiestre <mdiestre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:17:15 by mdiestre          #+#    #+#             */
-/*   Updated: 2025/05/08 13:17:17 by mdiestre         ###   ########.fr       */
+/*   Updated: 2025/05/12 11:34:28 by mdiestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,4 +19,3 @@ int	ft_print_str(char *s)
 	write(1, s, ft_strlen(s));
 	return (ft_strlen(s));
 }
-

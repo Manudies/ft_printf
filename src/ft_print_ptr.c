@@ -1,39 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_print_ptr.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiestre <mdiestre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 13:22:51 by mdiestre          #+#    #+#             */
-/*   Updated: 2025/05/12 11:43:25 by mdiestre         ###   ########.fr       */
+/*   Created: 2025/05/09 12:18:59 by mdiestre          #+#    #+#             */
+/*   Updated: 2025/05/12 11:53:49 by mdiestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdlib.h>
 
-char	*ft_utoa(unsigned int n)
+int	ft_print_ptr(void *ptr)
 {
-	char			*str;
-	unsigned int	tmp;
+	unsigned long	aux_ptr;
+	char			*hex_ptr;
 	int				len;
 
-	len = 1;
-	tmp = n;
-	while (tmp / 10)
-	{
-		tmp = tmp / 10;
-		len++;
-	}
-	str = malloc(len + 1);
-	if (!str)
-		return (NULL);
-	str[len] = '\0';
-	while (len--)
-	{
-		str[len] = (n % 10) + '0';
-		n /= 10;
-	}
-	return (str);
+	if (!ptr)
+		return (write(1, "0x0", 3));
+	aux_ptr = (unsigned long)ptr;
+	hex_ptr = ft_itoa_base(aux_ptr, 16, 0);
+	if (!hex_ptr)
+		return (0);
+	write(1, "0x", 2);
+	len = ft_strlen(hex_ptr);
+	write(1, hex_ptr, len);
+	len += 2;
+	free(hex_ptr);
+	return (len);
 }

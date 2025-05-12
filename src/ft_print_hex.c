@@ -1,39 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utoa.c                                          :+:      :+:    :+:   */
+/*   ft_print_hex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mdiestre <mdiestre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/08 13:22:51 by mdiestre          #+#    #+#             */
-/*   Updated: 2025/05/12 11:43:25 by mdiestre         ###   ########.fr       */
+/*   Created: 2025/05/09 10:53:44 by mdiestre          #+#    #+#             */
+/*   Updated: 2025/05/12 11:53:41 by mdiestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdlib.h>
 
-char	*ft_utoa(unsigned int n)
+int	ft_print_hex(unsigned int n, int uppercase)
 {
-	char			*str;
-	unsigned int	tmp;
-	int				len;
+	char	*str;
+	int		len;
 
-	len = 1;
-	tmp = n;
-	while (tmp / 10)
-	{
-		tmp = tmp / 10;
-		len++;
-	}
-	str = malloc(len + 1);
+	str = ft_itoa_base(n, 16, uppercase);
 	if (!str)
-		return (NULL);
-	str[len] = '\0';
-	while (len--)
-	{
-		str[len] = (n % 10) + '0';
-		n /= 10;
-	}
-	return (str);
+		return (0);
+	len = ft_strlen(str);
+	write(1, str, len);
+	free(str);
+	return (len);
 }
