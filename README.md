@@ -32,5 +32,5 @@ make fclean     # Limpia objetos y archivos finales
 
 
 
-```markdown
+
 Proyecto desarrollado por [Manuel Diestre Morcillo](https://github.com/Manudies)
