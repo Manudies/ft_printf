@@ -29,8 +29,7 @@ make            # Compila la parte obligatoria
 make bonus      # Compila también los bonus
 make clean      # Elimina los objetos
 make fclean     # Limpia objetos y archivos finales
-
-
+```
 
 
 Proyecto desarrollado por [Manuel Diestre Morcillo](https://github.com/Manudies)
