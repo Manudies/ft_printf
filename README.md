@@ -1,4 +1,4 @@
-# ft_printf
+# Printf
 
 Este proyecto forma parte del programa de 42 y consiste en una reimplementación de la función `printf` de la biblioteca estándar de C.
 
