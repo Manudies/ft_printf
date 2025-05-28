@@ -6,12 +6,11 @@
 /*   By: mdiestre <mdiestre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/09 10:14:33 by mdiestre          #+#    #+#             */
-/*   Updated: 2025/05/12 11:51:33 by mdiestre         ###   ########.fr       */
+/*   Updated: 2025/05/28 12:27:33 by mdiestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdlib.h>
 
 static int	ft_count_digits(unsigned int n, int base)
 {

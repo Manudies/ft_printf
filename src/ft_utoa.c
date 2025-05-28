@@ -6,12 +6,11 @@
 /*   By: mdiestre <mdiestre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 13:22:51 by mdiestre          #+#    #+#             */
-/*   Updated: 2025/05/12 11:43:25 by mdiestre         ###   ########.fr       */
+/*   Updated: 2025/05/28 12:16:51 by mdiestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
-#include <stdlib.h>
 
 char	*ft_utoa(unsigned int n)
 {
