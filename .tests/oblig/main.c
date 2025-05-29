@@ -6,7 +6,7 @@
 /*   By: mdiestre <mdiestre@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/08 10:39:30 by mdiestre          #+#    #+#             */
-/*   Updated: 2025/05/20 12:38:46 by mdiestre         ###   ########.fr       */
+/*   Updated: 2025/05/29 10:49:10 by mdiestre         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void test_char(void)
 	s1 = capture_output_to_file(test_printf_char_basic, &r1);
 	s2 = capture_output_to_file(test_ft_printf_char_basic, &r2);
 	ft_ok(strcmp(s1, s2) == 0, "Caso normal 'A'");
-	ft_ok(r1 == r2, "Valor devuelto (caso normal)");
+	ft_ok(r1 == r2, "Valor devuelto ('A')");
 	free(s1); free(s2);
 
 	// Carácter nulo
@@ -121,8 +121,8 @@ void test_char(void)
 	// Carácter > 127
 	s1 = capture_output_to_file(test_printf_char_big, &r1);
 	s2 = capture_output_to_file(test_ft_printf_char_big, &r2);
-	ft_ok(strcmp(s1, s2) == 0, "Carácter > 127");
-	ft_ok(r1 == r2, "Valor devuelto (>127)");
+	ft_ok(strcmp(s1, s2) == 0, "Carácter > 127 (128)");
+	ft_ok(r1 == r2, "Valor devuelto (128)");
 	free(s1); free(s2);
 
 	// Varios caracteres seguidos
